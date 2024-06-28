@@ -34,6 +34,17 @@ public class CalculationService {
     return calculation;
   }
 
+  public Calculation saveCalculation(Integer userId, String expression) {
+    User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    Calculation calculation = evalCalculation(expression);
+    // calculation.setExpression(expression);
+    // double result = evaluateExpression(expression);
+    // calculation.setResult(result);
+    calculation.setUserId(userId);  // Set userId
+    calculation.setTimestamp(LocalDateTime.now());
+    return calculationRepository.save(calculation);
+  }
+
   private double evaluateExpression(String expression){
     ScriptEngineManager manager = new ScriptEngineManager(); 
     ScriptEngine engine = manager.getEngineByName("JavaScript");

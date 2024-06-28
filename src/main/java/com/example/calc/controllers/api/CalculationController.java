@@ -18,4 +18,8 @@ public class CalculationController {
     return calculationService.evalCalculation( expression);
   }
 
+  @PostMapping("/{userId}/add")
+  public Calculation addCalculation(@PathVariable Integer userId, @RequestParam String expression) {
+    return calculationService.saveCalculation(userId, expression);
+  }
 }

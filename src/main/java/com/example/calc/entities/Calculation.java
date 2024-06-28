@@ -16,6 +16,7 @@ public class Calculation {
 
   private double result;
 
+  private Integer userId;
   private LocalDateTime timestamp;
   public Integer getId() {
     return id;
@@ -46,5 +47,13 @@ public class Calculation {
 
   public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
-  } 
+  }
+
+  public Integer getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
 }

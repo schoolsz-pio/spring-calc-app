@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.List;
+import jakarta.persistence.OneToMany;
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
 	@Id
@@ -15,6 +17,8 @@ public class User {
 
 	private String email;
 
+  @OneToMany(mappedBy = "userId")
+  private List<Calculation> calculations;
 	public Integer getId() {
 		return id;
 	}
@@ -39,4 +43,10 @@ public class User {
 		this.email = email;
 	}
 
+  public List<Calculation> getCalculations() {
+    return calculations;
+  }
+  public void setCalculations(List<Calculation> calculations) {
+    this.calculations = calculations;
+  }
 }
