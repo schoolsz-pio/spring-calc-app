@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+
 
 @Service
 public class CalculationService {
@@ -25,9 +28,21 @@ public class CalculationService {
     Calculation calculation = new Calculation();
     calculation.setExpression(expression);
 
+    double result = evaluateExpression(expression);
+    calculation.setResult(result);
 
     return calculation;
   }
 
+  private double evaluateExpression(String expression){
+    ScriptEngineManager manager = new ScriptEngineManager(); 
+    ScriptEngine engine = manager.getEngineByName("JavaScript");
+    try {
+      System.out.println(expression);
+      return  Double.parseDouble(engine.eval(expression).toString());
+    } catch (Exception e) {
+      throw new RuntimeException("Invalid expression: " + expression, e);
+    }
+  }
 
 }
