@@ -1,0 +1,38 @@
+
+<div class="row mt-4"   th:if="${calculations != null }">
+  <div class="col-md-6 offset-md-3 mt-4">
+    <div class="card mt-4">
+      <div class="card-header mb-3">
+        <h2 class="text-center"> Calculations</h2>
+      </div>
+
+      <form   th:action="@{/remove}" method="post">
+        <table class="table">
+          <thead>
+            <tr>
+              <th  scope="col">Expression</th>
+              <th scope="col">Result</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- TODO: get this somehow -->
+            <tr   th:each="calculation : ${calculations}">
+              <td th:text="${calculation.expression}"></td>
+              <td th:text="${calculation.result}"></td>
+              <td th:if="${calculation.timestamp != null }">
+                <input
+                  type="hidden"
+                  name="calcId"
+                  th:value="${calculation.id}"
+                />
+                <button class="btn btn-danger"  type="submit">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+
