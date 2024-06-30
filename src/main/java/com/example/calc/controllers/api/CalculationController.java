@@ -22,4 +22,22 @@ public class CalculationController {
   public Calculation addCalculation(@PathVariable Integer userId, @RequestParam String expression) {
     return calculationService.saveCalculation(userId, expression);
   }
+
+  @GetMapping("/{userId}")
+  public List<Calculation> getCalculations(@PathVariable Integer userId) {
+    List<Calculation> calculations = calculationService.getCalculationsByUserId(userId);
+    return calculations;
+  }
+  @GetMapping("/{userId}/remove/{calcId}")
+  public Boolean removeCalculation(@PathVariable Integer userId,@PathVariable Integer calcId) {
+    Calculation calculation= calculationService.getCalculationById(calcId);
+    if (calculation !=null){
+      if (calculation.getUserId() == userId){
+        calculationService.removeCalculation(calcId);
+        return true;
+      }
+
+    }
+    return false;
+  }
 }

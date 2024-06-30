@@ -45,6 +45,19 @@ public class CalculationService {
     return calculationRepository.save(calculation);
   }
 
+  public List<Calculation> getCalculationsByUserId(Integer userId) {
+    User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    return user.getCalculations();
+  }
+
+  public Calculation getCalculationById(Integer calculationId) {
+    Calculation calculation =calculationRepository.findById(calculationId).orElseThrow(() -> new RuntimeException("User not found"));
+    return calculation;
+  }
+  public void removeCalculation(Integer calculationId) {
+    calculationRepository.deleteById(calculationId);
+  }
+
   private double evaluateExpression(String expression){
     ScriptEngineManager manager = new ScriptEngineManager(); 
     ScriptEngine engine = manager.getEngineByName("JavaScript");
