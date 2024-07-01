@@ -8,5 +8,5 @@ import com.example.calc.entities.User;
 // CRUD refers Create, Read, Update, Delete
 
 public interface UserRepository extends CrudRepository<User, Integer> {
-
+  boolean existsByEmail(String email);
 }
