@@ -27,12 +27,11 @@ public class AuthController {
     return "register"; 
   }
   @PostMapping("/register")
-  public String registerSubmit(
-    @RequestParam("email") String email, @RequestParam("name") String name
-    ,Model model) {
+  public String registerSubmit(@RequestParam("email") String email, @RequestParam("name") String name,
+    @RequestParam("password") String password,Model model) {
     try  {
       // TODO: Check if it is a error
-      String resp = uController.addNewUser(name, email);
+      String resp = uController.addNewUser(name, email, password);
       model.addAttribute("registermessage", resp);
       return "login";
     } catch (Exception e) {

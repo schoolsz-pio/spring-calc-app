@@ -21,13 +21,14 @@ public class UserController {
 
 	@PostMapping(path="/add") // Map ONLY POST Requests
 	public @ResponseBody String addNewUser (@RequestParam String name
-			, @RequestParam String email) {
+    , @RequestParam String email, @RequestParam String password) {
 
     if (userRepository.existsByEmail(email)) {
       return "Email already exists";
     }
 		User n = new User();
 		n.setName(name);
+    n.setHash(password);
 		n.setEmail(email);
 		userRepository.save(n);
 		return "Saved";
