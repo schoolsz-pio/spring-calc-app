@@ -9,4 +9,5 @@ import com.example.calc.entities.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
   boolean existsByEmail(String email);
+  User findByEmail(String email);
 }
