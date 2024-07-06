@@ -26,6 +26,8 @@
                   name="calcId"
                   th:value="${calculation.id}"
                 />
+                <!-- TODO: Find why sometimes it redirects to /,/ when url is / -->
+                <input type="hidden" name="redirect" th:value="${url}" />
                 <button class="btn btn-danger"  type="submit">Remove</button>
               </td>
             </tr>

@@ -25,6 +25,9 @@ public class IndexController {
   @Autowired
   private CalculationController calculationservice;
 
+  private  void addUrlToModel(String path, Model model) {
+    model.addAttribute("url", path);
+  }
   private User getUser(){
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -56,6 +59,7 @@ public class IndexController {
 
   @GetMapping("/")
   public String home(Model model) {
+    addUrlToModel("/",model);
     giveBetterName(model);
     return "index"; 
   }
@@ -91,5 +95,19 @@ public class IndexController {
   public String history(Model model) {
     giveBetterName(model);
     return "his"; 
+  }
+
+
+  @PostMapping("/remove")
+  public String removeFOrm(@RequestParam("calcId") Integer calcId, @RequestParam("redirect") String redirect)  {
+
+    try  {
+      User user = getUser();
+
+      calculationservice.removeCalculation(user.getId(), calcId);
+    } catch (Exception e) {
+    }
+
+    return "redirect:" + redirect;
   }
 }
