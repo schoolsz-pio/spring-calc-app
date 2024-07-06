@@ -99,7 +99,7 @@ public class IndexController {
 
 
   @PostMapping("/remove")
-  public String removeFOrm(@RequestParam("calcId") Integer calcId, @RequestParam("redirect") String redirect)  {
+  public String removeForm(@RequestParam("calcId") Integer calcId, @RequestParam("redirect") String redirect)  {
 
     try  {
       User user = getUser();
