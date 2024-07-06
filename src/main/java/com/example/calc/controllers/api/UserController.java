@@ -34,6 +34,12 @@ public class UserController {
 		return "Saved";
 	}
 
+  @GetMapping("/id/{userId}")
+  public User getUser(@PathVariable Integer userId) {
+
+    User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    return user;
+  }
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<User> getAllUsers() {
 		// This returns a JSON or XML with the users
