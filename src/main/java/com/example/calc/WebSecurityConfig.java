@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -28,6 +31,7 @@ public class WebSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 
+    WebExpressionAuthorizationManager userIdMatch =new WebExpressionAuthorizationManager("#userId== authentication.principal.username");
     http.csrf().disable()
       .authorizeHttpRequests((authorize) ->
         authorize 
@@ -42,9 +46,13 @@ public class WebSecurityConfig {
 
         .requestMatchers("/users/add").permitAll()
 
+        .requestMatchers("/api/users/id/{userId}").access(userIdMatch)
+        .requestMatchers("/api/calculations/{userId}/**").access(userIdMatch)
+        .requestMatchers("/api/calculations/{userId}").access(userIdMatch)
+        // TODO: Add admin and dont allow others to acces this path
         .requestMatchers("/api/users/all").permitAll()
-        .requestMatchers("/api/calculations/{userId}/**").permitAll()
-        .requestMatchers("/api/calculations/{userId}").permitAll()
+        // .requestMatchers("/api/calculations/{userId}/**").permitAll()
+        // .requestMatchers("/api/calculations/{userId}").permitAll()
       ).formLogin(
         form -> form
         .loginPage("/login")
