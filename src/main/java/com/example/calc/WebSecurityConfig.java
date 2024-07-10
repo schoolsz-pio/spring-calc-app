@@ -42,7 +42,7 @@ public class WebSecurityConfig {
         .requestMatchers("/history").authenticated()
 
         .requestMatchers("/add").permitAll()
-        .requestMatchers("/calculations/eval").permitAll()
+        .requestMatchers("/api/calculations/eval").permitAll()
 
         .requestMatchers("/users/add").permitAll()
 
