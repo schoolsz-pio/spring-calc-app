@@ -14,6 +14,9 @@
       <div class="row mt-4">
         <div class="mt-4 col-md-6 offset-md-3">
 
+          <div th:if="${registermessage}">
+            <div class="alert alert-danger" th:text="${registermessage}" > fdsfdsafsda</div>
+          </div>
           <div th:if="${param.error}">
             <div class="alert alert-danger">Invalid Email or Password</div>
           </div>
