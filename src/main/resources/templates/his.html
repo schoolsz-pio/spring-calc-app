@@ -5,11 +5,10 @@
   <head >
     <span  th:replace="fragments/head.html"></span>
     <!-- TODO: Add name of user -->
-    <title th:text="'History - '" >History - Yours </title>
+    <title th:text="${name != null} ? 'History - ' + ${name} : 'History - Yours'">History - Yours</title>
   </head>
   <body>
     <header th:include="fragments/header.html"></header>
-    <br /><br />
     <div class="container pt-4">
       <div th:replace="fragments/calclist.html"></div>
     </div>
