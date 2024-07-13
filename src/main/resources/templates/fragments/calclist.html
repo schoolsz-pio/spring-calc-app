@@ -6,7 +6,6 @@
         <h2 class="text-center"> Calculations</h2>
       </div>
 
-      <form   th:action="@{/remove}" method="post">
         <table class="table">
           <thead>
             <tr>
@@ -21,19 +20,22 @@
               <td th:text="${calculation.expression}"></td>
               <td th:text="${calculation.result}"></td>
               <td th:if="${calculation.timestamp != null }">
+
+                <!-- NOTE: Its no longer redirects to /,/ but it looks ugly :< / -->
+              <form   th:action="@{/remove}" method="post">
                 <input
                   type="hidden"
                   name="calcId"
                   th:value="${calculation.id}"
                 />
-                <!-- TODO: Find why sometimes it redirects to /,/ when url is / -->
+
                 <input type="hidden" name="redirect" th:value="${url}" />
                 <button class="btn btn-danger"  type="submit">Remove</button>
+              </form>
               </td>
             </tr>
           </tbody>
         </table>
-      </form>
     </div>
   </div>
 </div>
